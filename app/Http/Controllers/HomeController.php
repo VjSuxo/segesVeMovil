@@ -23,26 +23,28 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return 'a';
+        return view('/admin/home');
     }
 
     public function userHome()
     {
-        return view('user/home',["msg"=>"Hello! I am user"]);
+        return view('/usuario/home');
     }
 
     public function controladorHome()
     {
-        return view('controlador/home',["msg"=>"Hello! I am controlador"]);
+        return view('/controler/home');
     }
 
     public function adminHome()
     {
-        return view('admin/home',["msg"=>"Hello! I am admin"]);
+        return 'a';
+        return view('/admin/home');
     }
 
     public function expositorHome()
     {
-        return view('expositor/home',["msg"=>"Hello! I am expositor"]);
+        return view('/expo/home');
     }
 }

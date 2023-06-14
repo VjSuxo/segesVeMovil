@@ -105,6 +105,11 @@
             clip-path: polygon(5% 100%, 25% 0px, 75% 0px, 95% 100%);
             pointer-events: none;
         }
+
+        .offcanvas-body{
+            background: rgb(28,28,28);
+background: linear-gradient(90deg, rgba(28,28,28,1) 24%, rgba(43,113,151,1) 62%);
+        }
     </style>
     </head>
 
@@ -118,21 +123,27 @@
 "><i class="lni lni-graduation"></i></a></li>
             </ul>
             <ul>
-                <li><a><i class="lni lni-circle-plus"></i></a></li>
+                <li><a class="{{Route::currentRouteName() === 'admin.home' ? 'active' : '' }}"><i class="lni lni-circle-plus"></i></a></li>
             </ul>
             <ul>
                 <li><a><i class="lni lni-cart"></i></a></li>
             </ul>
+            @guest
+            @if (Route::has('login'))
             <ul>
-
                 <li class="">
-                    @guest
-                    <a href="{{ route('login') }}" class="{{ ( Route::currentRouteName() === 'login' || Route::currentRouteName() === 'register') ? 'active' : '' }}"><i class="lni lni-user"></i></a></li>
-                    @endguest
-
-
+                    <a href="{{ route('login') }}" class="{{ ( Route::currentRouteName() === 'login' || Route::currentRouteName() === 'register') ? 'active' : '' }}"><i class="lni lni-user"></i></a>
+                </li>                           
             </ul>
+            @endif
+            @else 
+            <ul>
+                <li class="">
+                    <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" > <i class="lni lni-menu"></i></a>
 
+                </li>
+            </ul>
+            @endguest
             <div class="tubelight">
                 <div class="light-ray"></div>
             </div>
@@ -170,7 +181,36 @@
                 });
             });
         </script>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">{{ Auth::user()->name }}</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+        @if(Auth::user()->role == 'user')
+        @endif
+        @if(Auth::user()->role == 'admin')
+            <a href="">Usuarios</a>
+            <br>
+            <a href="">Eventos</a>
+            <br>
+            <a href="">Infraestructura</a>
+            <br>
+            <a href="">Ambiente</a>
+        @endif
+        <div>
+            <a class="dropdown-item" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+        </div>
 
+  </div>
+</div>
     </body>
 
 </html>

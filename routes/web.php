@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Evento;
 use App\Models\Expositor;
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,9 +35,21 @@ Route::get('/infoEventos/{evento}', function (Evento $evento) {
 })->name('infoeventos');
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware(['auth','user-role:admin'])->group(function(){
+Route::get('/admin/home', [AdminController::class, 'adminHome'])->name('admin.home');
+});
+
 Route::middleware(['auth','user-role:user'])->group(function(){
+    Route::get('/homeAdmin', [HomeController::class, 'adminHome'])->name('user.home');
+});
 
+Route::middleware(['auth','user-role:controlador'])->group(function(){
+    Route::get('/homeAdmin', [HomeController::class, 'adminHome'])->name('controlador.home');
+});
+
+Route::middleware(['auth','user-role:expositor'])->group(function(){
+    Route::get('/homeAdmin', [HomeController::class, 'adminHome'])->name('expositor.home');
 });
