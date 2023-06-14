@@ -121,10 +121,16 @@
                 <li><a><i class="lni lni-circle-plus"></i></a></li>
             </ul>
             <ul>
-                <li><a><i class="lni lni-user"></i></a></li>
+                <li><a><i class="lni lni-cart"></i></a></li>
             </ul>
             <ul>
-                <li><a><i class="lni lni-cart"></i></a></li>
+
+                <li class="">
+                    @guest
+                    <a href="{{ route('login') }}" class="{{ ( Route::currentRouteName() === 'login' || Route::currentRouteName() === 'register') ? 'active' : '' }}"><i class="lni lni-user"></i></a></li>
+                    @endguest
+
+
             </ul>
 
             <div class="tubelight">

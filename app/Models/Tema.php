@@ -38,7 +38,7 @@ class Tema extends Model
 
     public function ambiente()
     {
-        return $this->hasMany(Ambiente::class);
+        return $this->belongsTo(Ambiente::class);
     }
 
     public function tambientes()
