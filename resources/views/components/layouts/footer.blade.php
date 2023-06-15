@@ -133,10 +133,10 @@ background: linear-gradient(90deg, rgba(28,28,28,1) 24%, rgba(43,113,151,1) 62%)
             <ul>
                 <li class="">
                     <a href="{{ route('login') }}" class="{{ ( Route::currentRouteName() === 'login' || Route::currentRouteName() === 'register') ? 'active' : '' }}"><i class="lni lni-user"></i></a>
-                </li>                           
+                </li>
             </ul>
             @endif
-            @else 
+            @else
             <ul>
                 <li class="">
                     <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" > <i class="lni lni-menu"></i></a>
@@ -181,6 +181,11 @@ background: linear-gradient(90deg, rgba(28,28,28,1) 24%, rgba(43,113,151,1) 62%)
                 });
             });
         </script>
+
+
+@auth
+
+
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasExampleLabel">{{ Auth::user()->name }}</h5>
@@ -211,6 +216,7 @@ background: linear-gradient(90deg, rgba(28,28,28,1) 24%, rgba(43,113,151,1) 62%)
 
   </div>
 </div>
+@endauth
     </body>
 
 </html>
