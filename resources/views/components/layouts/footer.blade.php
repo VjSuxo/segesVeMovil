@@ -120,10 +120,20 @@ background: linear-gradient(90deg, rgba(28,28,28,1) 24%, rgba(43,113,151,1) 62%)
             </ul>
             <ul>
                 <li><a href=" {{ route('eventos')}} " class="{{ (Route::currentRouteName() === 'eventos' || Route::currentRouteName() === 'infoeventos') ? 'active' : '' }}
-"><i class="lni lni-graduation"></i></a></li>
+                    "><i class="lni lni-graduation"></i></a></li>
             </ul>
             <ul>
+                @guest
+                @if (Route::has('login'))
+            
+                    <li class="">
+                        <a href="{{ route('login') }}" class="{{ ( Route::currentRouteName() === 'login' || Route::currentRouteName() === 'register') ? 'active' : '' }}"><i class="lni lni-circle-plus"></i></a>
+                    </li>
+                @endif
+                @else                
                 <li><a class="{{Route::currentRouteName() === 'admin.home' ? 'active' : '' }}"><i class="lni lni-circle-plus"></i></a></li>
+                
+                @endguest
             </ul>
             <ul>
                 <li><a><i class="lni lni-cart"></i></a></li>
